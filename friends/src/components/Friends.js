@@ -2,6 +2,7 @@ import React from "react";
 
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import FriendForm from "./FriendForm";
+import Friend from "./Friend";
 
 class Friends extends React.Component {
   state = {
@@ -36,25 +37,22 @@ class Friends extends React.Component {
 
   render() {
     return (
-      <div className="friends">
-        <FriendForm onSubmit={this.onSubmit} />
-        {this.state.friends.map((friend) => (
-          <>
-            <div className="friend-container">
-              <p>{friend.name}</p>
-            </div>
-
-            <div className="age">
-              <p>{friend.age}</p>
-            </div>
-            <div className="email">
-              <p>{friend.email}</p>
-            </div>
-          </>
-        ))}
-      </div>
-    );
+        <div className="friends">
+            <FriendForm onSubmit={this.onSubmit} />
+          {this.state.friends.map(friend => {
+            return (
+              <Friend
+                key={friend.id}
+                friend={friend}
+                deleteFriend={this.deleteFriend}
+              />
+            );
+          })}
+        </div>
+      );
+    }
   }
-}
+
 
 export default Friends;
+
